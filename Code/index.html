@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CI system: Landing Page</title>
+        <meta name="description" content="continuous integration system">
+        <meta name="keywords" content="HTML,CSS,JSON,JavaScript">
+        <meta name="author" content="GlukAlex">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css"-->
+        <link rel="stylesheet" href="styles/w3.css">
+        <link rel="stylesheet" 
+        href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!--base href="http://www.w3schools.com/images/" target="_blank"-->
+        <style>
+            //body {background-color:yellow;}
+            body {
+                counter-reset: table_row;
+                background-color: lightblue;
+                //background-image: url("img/Landing_Page.png");
+                //background-repeat: no-repeat;
+                //background-position: left top;//right top;
+                //background-attachment: fixed;
+            }            
+            //p {color:blue;}
+            /* class="w3-table w3-striped w3-bordered w3-border w3-hoverable" */
+            #tests {
+                position: relative;
+                top: 81px;
+                left: 168px;
+            }
+            /*
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            
+            #customers {
+                font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            #customers td, #customers th {
+                font-size: 1em;
+                border: 1px solid #98bf21;
+                padding: 3px 7px 2px 7px;
+            }
+
+            #customers th {
+                font-size: 1.1em;
+                text-align: left;
+                padding-top: 5px;
+                padding-bottom: 4px;
+                background-color: #A7C942;
+                color: #ffffff;
+            }
+
+            #customers tr.odd td {
+                color: #000000;
+                background-color: #EAF2D3;
+            }
+            
+            .currentTeam {
+                text-align: center;
+                color: red;
+                background-color: Gold;
+            }
+            */
+            .right {
+                //position: absolute;
+                //position: relative;
+                //right: 0px;
+                float: right;
+            }
+            /**/
+            img {
+                width: 100%;
+                max-width: 100%;
+                height: auto;
+                z-index: -1;
+                display: block;
+                position: absolute;
+                clip: rect(70px,1120px,440px,140px);
+            }
+            figure {
+                //display: block;
+                display: none;
+            }
+            .progress_bar:after {
+              content: "\f0c8";
+            }
+            .gradient_slash_2 {
+              /*diagonally*/
+              /*-45deg, yellow, green 50%*/
+              /*-45deg, yellow, green 50%, yellow 50%*/
+              /* works almost as expected*/
+              /*-45deg, green 40%, yellow 60%*/
+              /*-45deg, green 33%, yellow 33%, green 34%*/
+              background: green; /* For browsers that do not support gradients */
+              /* Safari 5.1 to 6.0 */
+              background: -webkit-repeating-linear-gradient(-45deg, green 45%, yellow 55%);
+              /* Opera 11.1 to 12.0 */
+              background: -o-repeating-linear-gradient(-45deg, green 45%, yellow 55%);
+              /* Firefox 3.6 to 15 */
+              background: -moz-repeating-linear-gradient(-45deg, green 45%, yellow 55%);
+              /* Standard syntax */
+              background: repeating-linear-gradient(-45deg, green 45%, yellow 55%);
+            }
+        </style>
+        <!--link rel="stylesheet" href="mystyle.css"-->
+        <script 
+        src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+        </script>
+    </head>
+    <body onload="">
+        <section id = "pageTop"></section>
+        
+        <!--img src="img/Landing_Page.png" alt="The Landing Page layout"-->
+        <img 
+        src="img/Expanded_View__Passed_Build.png" 
+        alt="The Expanded View of Passed Build Page layout">
+        <!--img src="img/Expanded_View__Failed_Build.png" 
+        alt="The Expanded View of Failed Build Page layout"-->
+
+        <figure>
+            <img src="img/Landing_Page.png" alt="The Landing Page layout">
+            <figcaption>Figure 1:  Landing Page</figcaption>
+        </figure>
+        
+        <p id="demo"></p>
+        
+        <!-- class="w3-table w3-bordered w3-border w3-hoverable w3-col m7 l9" -->
+        <table id="tests"
+               class="w3-table w3-bordered w3-border w3-hoverable w3-col m7 l9 w3-card-2"
+               ng-app="integrationApp" 
+               ng-controller="submissionsCtrl"
+               >
+            <caption></caption>
+            <thead class="w3-container w3-medium w3-center">
+                <tr class="w3-small">
+                  <!-- &nbsp; style="width:2px;padding-left: 0px;padding-right: 0px;" -->
+                    <th class="w3-container w3-padding-0 w3-light-grey" 
+                    style="width:2px;">
+                      
+                    </th>
+                    <!--w3-text-black-->
+                    <th class="w3-text-grey w3-center">
+                      Change List
+                    </th>
+                    <th class="w3-text-black w3-center">Owner</th>
+                    <th class="w3-text-black w3-center">
+                        Time Started
+                    </th>
+                    <th class="w3-text-black w3-center">Build
+                    </th>
+                    <th class="w3-text-black w3-center">Unit Test</th>
+                    <th class="w3-text-black w3-center">Functional Test</th>
+                    <th class="w3-text-black w3-center">Status</th>
+                </tr>
+            </thead>  
+            <tbody>
+              <!-- ng-repeat="item in submissions | orderBy:'Time_Started'" -->
+              <!-- ng-repeat="item in submissions | orderBy:'Change_List': reverse" -->
+              <!-- ng-repeat="item in submissions | orderBy:'date': reverse" -->
+              <tr ng-repeat="item in submissions | orderBy:'-msec'"
+              class="w3-small">
+                <!--class="ng-class: (get_OverAll_Status_Color(item.status_Color) + ' w3-container w3-padding-0');"-->  
+                <!--style="color:orange;"-->
+                <!--ng-style="expression"-->
+                <td 
+                ng-class="item.status_Color + ' w3-container w3-padding-0';" 
+                style="width:5px;">
+                  <!--{{ item.status_Color }}  -->
+                </td>
+                <!-- class="w3-col w3-container l1" -->
+                <td class="w3-text-black w3-center">
+                  <!--span class="w3-teal" style="width:2px;">&nbsp;</span-->
+                  {{ item.Change_List }}
+                </td> 
+                <td class="w3-text-black w3-center">
+                  {{ item.Owner }}
+                </td>
+                <td class="w3-center">
+                  <!--{{ item.dd_mm_yyyy }}
+                  <i class="fa fa-clock-o"></i>
+                  {{ item.hh_mm }}
+                  {{ item.am.toLowerCase() }}-->
+                  <!--{{ item.Time_Started | date:'dd/MM/yyyy @ hh:mma'}}-->
+                  {{ item.msec | date:'MM/dd/yyyy' }}
+                  <i class="fa fa-clock-o"></i>
+                  {{ item.msec | date:'hh:mm' }}
+                  <!--{{ item.msec | angular.lowercase( date:'a') }}-->
+                  <!--{{ item.msec | (date:'a' + "").toLowerCase() }}-->
+                  {{ item.am.toLowerCase() }}
+                </td>
+                <td 
+                class="{{ item.text_Color }} w3-center w3-padding-0 w3-margin-0">
+                  <!--{{ item.Build.Status }}-->
+                  <!-- ng-class: expression; -->
+                  <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+                  </i>
+                    <i 
+                    ng-style="'{color:' + get_OverAll_Status_Color(item.status_Color) + '}'"
+                    ng-class="get_Status_Icon( item.Build.Status );"
+                    class="w3-padding-0 w3-margin-0"
+                    style="position: relative;top: -2.8px;left: -21.75px;"
+                    >
+                    </i>
+                  <!--progressBar_Text_Color-->  
+                  <!--ng-class="item.text_Color"-->
+                  <span 
+                  ng-class="progressBar_Text_Color(
+                    'Build',
+                    item.Build.Status,
+                    item.Unit_Test.Status,
+                    item.text_Color
+                  );"
+                  class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+                  style="max-width: 100%;float: right;"
+                  >
+                    &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+                  </span>
+                </td>
+                <!-- w3-rest  -->
+                <td 
+                ng-class="item.text_Color"
+                class=" w3-center w3-padding-0 w3-margin-0"
+                >
+                  <span 
+                  ng-class="progressBar_Text_Color(
+                    'Build',
+                    item.Build.Status,
+                    item.Unit_Test.Status,
+                    item.text_Color
+                  );"
+                  class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+                  style="max-width: 100%;float: left;"
+                  >
+                    &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+                  </span>
+                  <!--{{ item.Unit_Test.Status }}-->
+                  <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+                  </i>
+                  <i 
+                  ng-class="get_Status_Icon( item.Unit_Test.Status );"
+                  class=" w3-padding-0 w3-margin-0"
+                  style="position: relative;top: -2.8px;left: -21.75px;">
+                    
+                  </i>
+                  <span 
+                  ng-class="progressBar_Text_Color(
+                    'Build',
+                    item.Unit_Test.Status,
+                    item.Functional_Test.Status,
+                    item.text_Color
+                  );"
+                  class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+                  style="max-width: 100%;float: right;"
+                  >
+                    &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+                  </span>
+                </td>
+                <!-- class="w3-col w3-container w3-rest" -->
+                <td 
+                ng-class="item.text_Color"
+                class=" w3-center w3-padding-0 w3-margin-0"
+                >
+                  <span 
+                  ng-class="progressBar_Text_Color(
+                    'Build',
+                    item.Functional_Test.Status,
+                    item.status,
+                    item.text_Color
+                  );"
+                  class=" w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+                  style="max-width: 100%;float: left;"
+                  >
+                    &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+                  </span>
+                  <!--div 
+                  class="w3-text-blue w3-tiny w3-round w3-padding-0 w3-margin-0 gradient_slash_2">
+                    &#9640;&#9640;&#9640;&#9640;&#9640;
+                  <div-->
+                  <!--{{ item.Functional_Test.Status }}-->
+                  <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+                  </i>
+                  <i 
+                  ng-class="get_Status_Icon( item.Functional_Test.Status );"
+                  class="w3-padding-0 w3-margin-0"
+                  style="position: relative;top: -2.8px;left: -21.75px;">
+                    
+                  </i>
+                </td>                
+                <td ng-class="get_Text_Color(item.status)">
+                  <!-- work as expected i class="ng-class: item.icon;"></i-->
+                  <!--{{ $scope.Status[1] }}
+                  {{ get_Status() }}-->
+                  <i class="ng-class: get_Status_Icon( 
+                  get_Status( 
+                  item.Build.Status,
+                  item.Unit_Test.Status,
+                  item.Functional_Test.Status ),
+                  true
+                  );"></i>
+                  {{ item.status }}
+                </td>                
+              </tr>
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        
+        <!--div ng-app="integrationApp" ng-controller="submissionsCtrl"> 
+
+          <ul>
+            <li ng-repeat="item in submissions">
+              {{ item.Owner + ', ' + item.Change_List }}
+            </li>
+          </ul>
+        
+        </div-->
+        
+        <!--nav class="w3-topnav w3-green">
+          <a href="#" class="w3-text-red">&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;</a>
+        </nav-->
+        <!--a href="#" class="w3-text-red w3-xxlatge"><h1>&nbsp;&nbsp;   &nbsp;&nbsp;&nbsp;</h1></a-->
+        
+        <!--w3-tag -> adds line-height: 1.5;-->
+        <!--
+        ⚪	9898	26AA	 	MEDIUM WHITE CIRCLE
+        ⚫	9899	26AB	 	MEDIUM BLACK CIRCLE-
+        ⚉	9865	2689	 	BLACK CIRCLE WITH TWO WHITE DOTS
+        …	8230	2026	&hellip;	HORIZONTAL ELLIPSIS
+        ┅	9477	2505	 	BOX DRAWINGS HEAVY TRIPLE DASH HORIZONTAL
+        —	8212	2014	&mdash;	EM DASH
+        ―	8213	2015	 	HORIZONTAL BAR
+        ━	9473	2501	 	BOX DRAWINGS HEAVY HORIZONTAL
+        ▃	9603	2583	 	LOWER THREE EIGHTHS BLOCK
+        ▄	9604	2584	 	LOWER HALF BLOCK
+        █	9608	2588	 	FULL BLOCK
+        ■	9632	25A0	 	BLACK SQUARE
+        ▨	9640	25A8	 	SQUARE WITH UPPER RIGHT TO LOWER LEFT FILL
+        ▬	9644	25AC	 	BLACK RECTANGLE
+        ▰	9648	25B0	 	BLACK PARALLELOGRAM
+        ▱	9649	25B1	 	WHITE PARALLELOGRAM
+        »	187	&raquo;	right-pointing double angle quotation mark
+        -->
+        <!--span class="w3-text-green w3-gray w3-tiny w3-padding-0 w3-margin-0">
+          &#9473;&#9473;&#9473;
+        </span-->
+        
+        <!--div class="w3-row-padding w3-container w3-medium w3-animate-left w3-gray">
+          <div class="w3-text-red w3-small w3-third">&nbsp;</div>
+        </div-->
+        
+            <!--position: absolute-->
+        <!--div>
+          <i class="fa fa-circle-thin w3-large">
+            <i 
+            class="fa fa-circle w3-small w3-text-indigo w3-padding-0 w3-margin-0"
+            style="position: relative;top: -2.5px;left: -17px;"
+            >
+              
+            </i>
+          </i>
+        </div-->
+        <!--p>
+            <a href="#pageTop" class="right">
+              <button onclick="">Top&uarr;</button>
+            </a>            
+        </p-->   
+        
+        <script>
+            "use strict"; 
+            
+            // for "Time_Started":
+            //new Date(year, month, day, hours, minutes, seconds, milliseconds)
+            /*
+            There are 
+            a total of 4 possible statuses 
+            based on 
+            the current state of the CI system:  
+            Pending, Running, Passed, Failed. 
+            */
+            // The undefined property indicates 
+            // that a variable has not been assigned a value.
+            // for "Build":, "Unit_Test": , "Functional_Test":
+            //"Status": ["Pending", "Running", "Passed", "Failed", null == N/A == None == undefined]
+            
+        </script>
+        <script 
+                type="text/javascript"
+                src="scripts/app.js"
+                ></script>
+        <!-- async defer -->        
+        <script 
+                type="text/javascript"
+                src="scripts/submissions_Ctrl.js"
+                ></script>
+        
+        <noscript>Sorry, your browser does not support JavaScript!</noscript>
+
+    </body>
+</html>

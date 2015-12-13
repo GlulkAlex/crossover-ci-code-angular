@@ -1,0 +1,53 @@
+<style>
+  .injected-text {
+    margin-bottom: -25px;
+    text-align: center;
+     z-index: 0;
+  }
+
+  .box {
+    border-style: solid;
+    border-color: black;
+    border-width: 0px;
+    text-align: center;
+  }
+
+  .yellow-box {
+    background-color: yellow;
+    padding:10px;
+  }
+  
+  .red-box {
+    background-color: yellow;
+    padding: 0px;
+    //float: left;
+    z-index: 2;
+    height: 16;
+    margin: 0px;
+    margin-left: 16%;
+    position: relative;
+    top: -35px;
+  }
+
+  .green-box {
+    background-color: SpringGreen;
+    padding: 00px;
+    padding-left: 0px;
+    margin: 20px;
+     z-index: 1;
+    color: green;
+    letter-spacing: 3px;
+    text-indent: 0px;
+    text-align: left;
+    font-style: italic;
+    font-weight: bold;
+  }
+</style>
+<h5 class="injected-text">margin</h5>
+
+<div class="box yellow-box">
+  <h5 class="box green-box">
+    ///////////////|||||||||||||||||/
+  </h5>
+  <h5 class="box red-box"></h5>
+</div>

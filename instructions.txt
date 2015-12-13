@@ -1,0 +1,343 @@
+Please 
+read through your assignment very carefully 
+before beginning your solution. 
+Try to 
+complete as much of the solution as possible 
+in the given timeframe. 
+To upload your solution, 
+click the "SELECT FILE" button above. 
+After selecting your solution, click "UPLOAD". 
+You will be able to 
+review your submission after uploading it.
+
+If you have any questions, 
+submit a [Support Request](mailto:tech-trial@crossover.com). 
+However, 
+your questions should 
+pertain to the test-taking procedure rather than 
+the content of the assignment. 
+If you had 
+any problems and 
+need an extension, 
+please feel free to 
+Request an Extension. 
+We will determine 
+the extension period 
+based on the reason of the request.
+
+Congratulations on making it to this stage 
+of the Senior Developer evaluation! 
+With the insane amount of applications our companies receive, 
+it’s almost impossible for them to 
+sort out the great candidates (that’s you!) 
+What we provide is 
+a way for you to show your skills, and 
+differentiate yourself 
+from all the other applicants. 
+By doing well on this ‘Real Scenario’ assignment, 
+you’ll go from 
+being just another resume in a pile of 1000, 
+to being 
+one of the 5 candidates we are showing to companies as 
+the “best of the best”. 
+This is the biggest, and 
+most important part of our process. 
+After you complete the assignment 
+we will set up 
+a quick interview for you 
+to be able to discuss what you’ve built 
+(and let you brag a little). 
+That’s it, 
+then you’re done!
+
+We’ve tried to scope the project to be 
+an appropriate size 
+so 
+you can complete in a reasonable amount of time, 
+while still being able to 
+demonstrate your enterprise-­class development skills. 
+Though this is a fictitious example, 
+this scenario is very similar to 
+what you may encounter in your Senior Developer job.
+
+Overall Objectives
+---
+Our Front End Senior Developer’s primary job is 
+to take a graphic designer’s visual design and 
+create 
+a well structured 
+modern web page 
+that encapsulates the design. 
+For this assignment, 
+you will be doing just that, 
+taking a visual design 
+that was created and 
+translate that into 
+a functioning interactive page. 
+The visual design will be provided. 
+Your main objective is 
+to make a pixel perfect copy of the design 
+for the visuals you have, 
+filling in the blanks 
+for states / items you don’t have details for, and 
+making it 
+an interactive, 
+animated, 
+data backed page.
+
+Specifically:
+A single page web application 
+based on 
+the visual design provided (pixel perfect copy)
+For details you don’t have, 
+use your experience to “fill in the blanks”.
+This should be 
+an interactive, 
+data-backed, 
+polished implementation 
+with animations.
+Unit testing 
+for the application 
+should be done where appropriate. 
+What you would expect as 
+a minimum for enterprise development work.
+
+Bonus Objective: 
+Make the page 
+update dynamically 
+with some mocked backend.
+Create 
+a sample backend 
+so 
+we can see it working!
+
+Note:
+Any backend code will not will not be evaluated critically. 
+Its inclusion would be 
+purely for us 
+to test your dynamic page.
+
+Technical Background
+---
+Below you’ll see 
+the final visual design 
+provided by the visual design team. 
+The product manager has given you 
+only a few notes about the web application. 
+What you see below is 
+a new continuous integration system. 
+
+There is 
+a list of runs 
+that have been triggered for this product, 
+sorted reverse chronologically. 
+Every row has 
+as summary (collapsed) view, and 
+a detail (expanded) view. 
+There are 
+a total of 4 possible statuses 
+based on the current state of the CI system: 
+Pending, Running, Passed, Failed. 
+
+Only one row is expanded at any time, 
+clicking on a new row 
+would collapse any row that was previously expanded. 
+
+Lastly, 
+the user could 
+drill to even deeper information 
+from clicking on some elements in the expanded state, 
+(Like seeing more information about Unit Tests). 
+
+This second level of detail is 
+not a requirement of the application, but 
+is detailed here just for context.
+
+We realize that 
+the above is not a complete specification, and 
+the expectation is 
+for you to 
+implement a solution 
+based on 
+the information you have. 
+When unsure 
+how to proceed 
+make a decision 
+based on your instincts 
+on what should be done 
+according to your experience and 
+show your skills.
+
+Figure 1: Landing Page
+Figure 2: Expanded View: Passed Build
+Figure 3: Expanded View: Failed Build
+
+Requirements
+---
+A single page architecture 
+for a data driven app 
+using 
+a MV* JS platform of choice (Angular, Backbone, Ember). 
+The page should be 
+data-backed, 
+getting all of it’s data from JSON.
+Final solution should 
+look polished, 
+be pixel perfect where appropriate and 
+have a good attention to detail on visuals / animations etc.
+
+Well supported CSS framework (Compass, Sussy, Bourbon) should be used.
+Cross-browser compatibility (Safari, Chrome, IE11+, iOS Safari, Android Chrome). 
+You are expected to be using 
+a responsive (or equiv) framework 
+to do the heavy lifting here.
+If you are unable to meet this requirement, 
+you should document 
+the platforms you were able to support 
+in the time provided for the assignment.
+If you go for the bonus object, 
+ensure that 
+any RESTful friendly interactions you follow the REST standard.
+Depending on how you design the interactivity, 
+you do not need 
+EVERY call to be REST (ex: websockets).
+
+Scoring
+---
+Code quality
+Code modularity
+Application organization across files and 
+within each file
+(please ensure 
+you follow framework standards as appropriate)
+Code documentation 
+(balancing between 
+self documenting code and 
+comments)
+Unit testing
+Exception handling where available and 
+expected in the frameworks you’re using.
+Best Practices of Technology Applied MV* JS framework.
+This is critically important. 
+In example, 
+code can be using Angular, but 
+if it doesn’t follow the standards 
+for how, 
+where, and 
+when to use directives, 
+it’s not a good use of Angular. 
+Design adherence / Polish
+Is it pixel perfect and 
+does it look identical to the mockups where appropriate.
+Do any additions 
+you had to 
+make that were not mocked up specifically 
+match the visual design / interaction of the mockups.
+Easy to use
+Attractive
+UI responsiveness
+Animations
+Similarity across browsers.
+
+Delivery / What to submit
+---
+Please, 
+read and follow this section carefully. 
+Any delivery that 
+does not follow this section 
+will score much less or 
+simply won't be evaluated.
+You will be submitting your deliverable through 
+the Crossover Candidate Portal. 
+The delivery for this assignment should 
+consist of a zip file named 
+SD_FE-&lt;your_name&gt;.zip
+containing the following:
+./README.txt - A simple readme on:
+-- If you need to build anything (Example: grunt)
+-- How to start your application (Example: node.js server startup script)
+-- How to execute your unit tests, and 
+where the results are shown
+-- Any known issues
+
+- folder that contains 
+all your Code 
+in whatever hierarchy that is appropriate
+./Demo/ - folder containing 
+either
+Demo.mp4 - Video demonstration of your solution 
+recorded via some screen capturing tool and 
+encoded in mp4 video format. 
+Please ensure 
+the size of the video is less than 30MB. 
+DemoReadme.txt - file that 
+includes the link 
+to a live site of your project.
+(Herokuapp is great for this)
+
+Thank you and 
+we look forward to 
+seeing your creativity 
+in this ‘real scenario’ work assignment!
+---
+How do we evaluate our candidates?
+We evaluate your delivery against the following three criteria:
+COMPLETENESS:
+The amount of the given task that you completed.
+DESIGN QUALITY:
+The quality of your architecture or design for the given task.
+CODE QUALITY:
+The quality of the implementation of your design.
+
+What are the possible outcomes of the evaluation?
+Invited but not started:
+If you are invited but 
+do not start your assignment within the given invitation period, 
+don’t worry - 
+you can apply again whenever you have the time.
+
+Invited, started, and NOT delivered:
+If you start your assignment but 
+do not deliver it, 
+you will not be eligible for 
+a second chance 
+until six months after your initial evaluation.
+
+Invited, started, delivered, and NOT selected:
+If you started and 
+delivered your assignment solution but 
+are not selected to move on, 
+you may have a second chance! 
+We will assess your score 
+as well as the effort 
+that you put into the assignment. 
+If you qualify for a second chance, 
+we will let you know by email and 
+re-invite you to the project evaluation after one month.
+
+Request an Extension
+Please indicate how much time do you need, and 
+the reason for it.
+We will determine 
+the duration of the extension 
+based on the reason of the request.
+
+Please note the following:
+Once you click the Start Trial button below, 
+the process is irreversible. 
+We cannot stop the 3 day countdown
+
+Failure to deliver in 3 days 
+will result 
+in you not being able to 
+apply for the same role for 6 months
+
+Clicking the Start Trial button below 
+will start 
+a 3 day countdown clock. 
+If you have understood and 
+accept the terms above, 
+please 
+click the Start Trial button. 
+Otherwise, 
+click cancel.

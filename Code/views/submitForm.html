@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kaggle competitions submitForm</title>
+        
+        <!--meta name="viewport" content="initial-scale=1" /-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta name="description" content="Kaggle competitions leaderboard">
+        <meta name="keywords" content="HTML,CSS,JSON,JavaScript">
+        <meta name="author" content="GlukAlex">
+        <meta charset="UTF-8">
+        
+        <!--base href="http://www.w3schools.com/images/" target="_blank"-->
+        <style>
+        </style>
+        
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="../css/w3.css">
+        <!-- Font Awesome Icons library -->
+        <link 
+              rel="stylesheet" 
+              href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+        
+        <!--link rel="stylesheet" href="mystyle.css"-->
+        <!-- Latest compiled and minified CSS -->
+        <!--link rel="stylesheet" 
+              href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"-->
+
+        <!-- jQuery library -->
+        <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+        </script-->
+
+        <!-- Latest compiled JavaScript -->
+        <!--script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js">
+        </script-->
+        
+    </head>
+    <body class="w3-padding">
+        
+        <!-- Angular.js works as expected but
+        Angular Material not -->
+        <!--div ng-app=""-->
+
+        <!--
+        for $ python -m http.server 8000
+        >>>Message: Unsupported method ('POST').
+        Error code explanation: 
+        501 - Server does not support this operation.
+        
+        method="POST"
+        action="/api/competition/{CompetitionName}/submit"
+        onsubmit="loadUpdatedLeaderBoardTable()"
+        -->
+        <!--
+        GET submit produce URL:
+        http://localhost:8000/views/homePageURL?teamName=IFM_bioinformatics&score=12345.0&dateSubmitted=2015-10-08T22%3A23%3A10&numSubmissions=1&userNames=
+        -->
+        <section class="w3-card-4">
+            <form 
+                  name = "teamSubmission"
+                  action = "http://localhost:8000/" 
+                  method = "GET"
+                  accept-charset = "UTF-8"
+                  enctype = "application/x-www-form-urlencoded" 
+                  autocomplete = "on"
+                  onsubmit="loadUpdatedLeaderBoardTable()"
+                  class="w3-form">              
+                  <!--class="container"
+                  -->
+                <!--class="w3-container w3-brown"-->
+                <fieldset >
+                          <!--class="w3-input-group">
+                          <!--class="form-group"-->
+                    <legend class="w3-container w3-brown">Submission form:</legend>
+                    <div class="w3-input-group">
+                        <label 
+                               for="teamName"
+                               class="w3-label w3-text-brown"
+                               >Team Name:</label>
+                      <input type="text" 
+                             name="teamName" 
+                             value="IFM_bioinformatics"
+                             placeholder="IFM_bioinformatics"
+                             class="w3-input w3-border w3-sand">
+                             <!--class="form-control"-->
+                      </div>  
+                      <!--br-->
+                    <div class="w3-input-group">
+                        <label 
+                               for="score"
+                               class="w3-label w3-text-brown"
+                               >Score:</label>
+                      <input type="text" 
+                             name="score" 
+                             value="12345.0"
+                             placeholder="12345.0"
+                             class="w3-input w3-border w3-sand">
+                             <!--class="form-control"-->
+                    </div>
+                    <!--br-->
+                    <div class="w3-input-group">
+                        <label 
+                               for="dateSubmitted"
+                               class="w3-label w3-text-brown"
+                               >Date Submitted:</label>
+                      <input type="datetime-local" 
+                             name="dateSubmitted" 
+                             value="2015-10-08T22:23:10"
+                             placeholder="2015-10-08T22:23:10"
+                             class="w3-input w3-border w3-sand">
+                             <!--class="form-control"-->
+                    </div>
+                    <!--br-->
+                    <div class="w3-input-group">
+                    <label 
+                           for="numSubmissions"
+                           class="w3-label w3-text-brown"
+                           >Num Submissions:</label>
+                      <input type="text" 
+                             name="numSubmissions" 
+                             value="1"
+                             placeholder="1"
+                             class="w3-input w3-border w3-sand">
+                             <!--class="form-control"-->
+                    </div>
+                    <!--br-->
+                    <div class="w3-input-group">
+                        <label for="userNames"
+                           class="w3-label w3-text-brown"
+                           >List of user's names: 
+                            <i class="fa-li fa fa-spinner fa-spin fa-fw"></i>
+                        </label>
+                      <input list="users" 
+                             name="userNames"
+                             class="w3-input w3-border w3-sand">
+                             <!--class="form-control"-->
+                      <datalist id="users">
+                        <option value="Jonas Carlsson">
+                            <!-- does not work inside `option` either -->
+                            <i class="fa-li fa fa-spinner fa-spin"></i></option>
+                        <option value="Fredrik Lysholm">
+                      </datalist>
+                    </div>    
+                    <!--br-->
+                    <div 
+                         class="w3-input-group">
+                         <!--class="form-group"-->
+                        <label 
+                             for="selectUsers"
+                             class="w3-label w3-text-brown"
+                             >
+                            Select list: 
+                            <i class="fa-li fa fa-check-square fa-fw"></i>
+                        </label>
+                    </div>    
+                      <select 
+                              multiple                              
+                              id="selectUsers"
+                              name="selectUsers"
+                              class="w3-select w3-sand"
+                              >
+                              <!--class="form-control"--> 
+                        <option value="" disabled selected>Choose your option</option> 
+                        <!-- icons not work inside `select` -->  
+                        <option><i class="fa-li fa fa-spinner fa-spin"></i>Jonas Carlsson</option>
+                        <option>Fredrik Lysholm</option>
+                        <option>Lysholm Fredrik</option>
+                        <option>Carlsson Jonas</option>
+                      </select>
+                    <!--/div-->
+                    <div 
+                         class="w3-input-group">
+                        <button 
+                                action = "#"
+                                onsubmit="showModal(event)"
+                                onclick="showModal(event)" 
+                                class="w3-btn">
+                            <span class="w3-large w3-spin fa fa-home fa-fw"></span>
+                            <!-- 'space' after 'text' & before `icon` - matters -->
+                            Open Modal 
+                            <i class="fa fa-check-square-o"></i>
+                        </button>
+                        <input 
+                               type="submit" 
+                               class="w3-btn w3-brown w3-round w3-wide w3-ripple w3-right w3-large">
+                               <!--class="btn btn-default"-->                        
+                    </div> 
+                </fieldset>   
+            </form> 
+        </section>  
+
+        <!-- hidden element, but not custom tag / shadow DOM -->
+        <div 
+             id="id01" 
+             class="w3-modal">
+          <div class="w3-modal-content w3-card-4">
+            <header class="w3-container w3-teal"> 
+              <span 
+                    onclick="document.getElementById('id01').style.display='none'" 
+                    class="w3-closebtn">&times;</span>
+              <h2>Header</h2>
+            </header>
+            <div class="w3-container">
+              <p>Some text. Some text. Some text.</p>
+              <p>Some text. Some text. Some text.</p>
+            </div>
+            <footer class="w3-container w3-teal">
+              <p>Footer</p>
+            </footer>
+          </div>
+        </div>
+        
+                
+        <script>
+            "use strict"; 
+            /*jshint multistr: true */
+            var tableContent_text = '{ \
+                "DateSubmitted": "2010-08-02T00:00:35", \
+              "NumSubmissions": 73, \
+              "Rank": 1, \
+              "Score": 77.3121, \
+              "TeamName": "Chris_R", \
+              "Users": [ \
+                  { \
+                      "Id": 78, \
+                      "UserName": "Chris Raimondi" \
+                  } \
+              ] \
+            }';
+            var tableContent_obj = JSON.parse(tableContent_text);
+            var tableObj = document.getElementById("customers");
+            
+            var xmlhttp = new XMLHttpRequest();
+            /* must be some factory
+            for multiple requests
+            */
+            var xmlHTTP = new XMLHttpRequest();
+            var url = 
+                //"http://leaderboard-project.azurewebsites.net/api/competition/hivprogression/leaderboard";
+                "http://localhost:8000/leaderboard.json"
+            var leaderBoard_xhr = [];
+            var loggedInUserTeam = "Team Ben";
+            var competitions_xhr = [];
+            var competitions_URL = 
+                //"http://leaderboard-project.azurewebsites.net/api/competition";
+                // local
+                "http://localhost:8000/competition.json"
+            var competitionsElem = document.getElementById("competitions");
+            var homePageURL = "http://localhost:8000/"
+            
+            /*
+            onsubmit="loadUpdatedLeaderBoardTable()"
+            ? redundant ?
+            */
+            function loadUpdatedLeaderBoardTable() {
+                // The 'window.location.assign()' method 
+                // loads a new document.
+                window.location.assign("http://localhost:8000/")                
+            }
+            function loadSubmitForm() {
+                window.location.assign("http://localhost:8000/submitForm.html")
+            }
+            /*
+            Sort numbers (numerically and descending) 
+            */
+            /* // that works
+            recordsArrayOfObj = [
+                {"name": "Alex", "score": 10}, 
+                {"name": "Peter", "score": 90}]
+            recordsArrayOfObj.sort(function(a, b){return b.score - a.score;});
+            // '>' inverte / inverse / reverse ordering
+            recordsArrayOfObj.sort(function(a, b){return a.name < b.name;});
+            recordsArrayOfObj.reverse();
+            */
+            
+            function checkFormFieldValidity() {
+                var inpObj = document.getElementById("id1");
+                
+                if (inpObj.checkValidity() === false) {
+                    document.getElementById("demo").innerHTML = inpObj.validationMessage;
+                }
+            }
+            
+            function showModal(event) {
+                event.preventDefault();
+                document.getElementById('id01').style.display = 'block';
+            }
+        </script>
+        
+        <noscript>Sorry, your browser does not support JavaScript!</noscript>
+
+    </body>
+    
+</html>
