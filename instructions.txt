@@ -55,7 +55,7 @@ an appropriate size
 so 
 you can complete in a reasonable amount of time, 
 while still being able to 
-demonstrate your enterprise-­class development skills. 
+demonstrate your enterprise-class development skills. 
 Though this is a fictitious example, 
 this scenario is very similar to 
 what you may encounter in your Senior Developer job.

@@ -1,0 +1,181 @@
+    <!-- class="w3-table w3-bordered w3-border w3-hoverable w3-col m7 l9" -->
+    <table 
+    id="tests"
+    class="w3-table w3-bordered w3-border w3-hoverable w3-col m7 l9 w3-card-2"
+    ng-app="integrationApp" 
+    ng-controller="submissionsCtrl"
+    >
+      <caption></caption>
+      <thead class="w3-container w3-medium w3-center">
+          <tr class="w3-small">
+            <!-- &nbsp; style="width:2px;padding-left: 0px;padding-right: 0px;" -->
+              <th class="w3-container w3-padding-0 w3-light-grey" 
+              style="width:2px;">
+                
+              </th>
+              <!--w3-text-black-->
+              <th class="w3-text-grey w3-center">
+                Change List
+              </th>
+              <th class="w3-text-black w3-center">Owner</th>
+              <th class="w3-text-black w3-center">
+                  Time Started
+              </th>
+              <th class="w3-text-black w3-center">Build
+              </th>
+              <th class="w3-text-black w3-center">Unit Test</th>
+              <th class="w3-text-black w3-center">Functional Test</th>
+              <th class="w3-text-black w3-center">Status</th>
+          </tr>
+      </thead>  
+      <tbody>
+        <!-- ng-repeat="item in submissions | orderBy:'Time_Started'" -->
+        <!-- ng-repeat="item in submissions | orderBy:'Change_List': reverse" -->
+        <!-- ng-repeat="item in submissions | orderBy:'date': reverse" -->
+        <tr ng-repeat="item in submissions | orderBy:'-msec'"
+        class="w3-small">
+          <!--class="ng-class: (get_OverAll_Status_Color(item.status_Color) + ' w3-container w3-padding-0');"-->  
+          <!--style="color:orange;"-->
+          <!--ng-style="expression"-->
+          <td 
+          ng-class="item.status_Color + ' w3-container w3-padding-0';" 
+          style="width:5px;">
+            <!--{{ item.status_Color }}  -->
+          </td>
+          <!-- class="w3-col w3-container l1" -->
+          <td class="w3-text-black w3-center">
+            <!--span class="w3-teal" style="width:2px;">&nbsp;</span-->
+            {{ item.Change_List }}
+          </td> 
+          <td class="w3-text-black w3-center">
+            {{ item.Owner }}
+          </td>
+          <td class="w3-center">
+            <!--{{ item.dd_mm_yyyy }}
+            <i class="fa fa-clock-o"></i>
+            {{ item.hh_mm }}
+            {{ item.am.toLowerCase() }}-->
+            <!--{{ item.Time_Started | date:'dd/MM/yyyy @ hh:mma'}}-->
+            {{ item.msec | date:'MM/dd/yyyy' }}
+            <i class="fa fa-clock-o"></i>
+            {{ item.msec | date:'hh:mm' }}
+            <!--{{ item.msec | angular.lowercase( date:'a') }}-->
+            <!--{{ item.msec | (date:'a' + "").toLowerCase() }}-->
+            {{ item.am.toLowerCase() }}
+          </td>
+          <td 
+          class="{{ item.text_Color }} w3-center w3-padding-0 w3-margin-0">
+            <!--{{ item.Build.Status }}-->
+            <!-- ng-class: expression; -->
+            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            </i>
+              <i 
+              ng-style="'{color:' + get_OverAll_Status_Color(item.status_Color) + '}'"
+              ng-class="get_Status_Icon( item.Build.Status );"
+              class="w3-padding-0 w3-margin-0"
+              style="position: relative;top: -2.8px;left: -21.75px;"
+              >
+              </i>
+            <!--progressBar_Text_Color-->  
+            <!--ng-class="item.text_Color"-->
+            <span 
+            ng-class="progressBar_Text_Color(
+              'Build',
+              item.Build.Status,
+              item.Unit_Test.Status,
+              item.text_Color
+            );"
+            class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+            style="max-width: 100%;float: right;"
+            >
+              &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+            </span>
+          </td>
+          <!-- w3-rest  -->
+          <td 
+          ng-class="item.text_Color"
+          class=" w3-center w3-padding-0 w3-margin-0"
+          >
+            <span 
+            ng-class="progressBar_Text_Color(
+              'Build',
+              item.Build.Status,
+              item.Unit_Test.Status,
+              item.text_Color
+            );"
+            class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+            style="max-width: 100%;float: left;"
+            >
+              &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+            </span>
+            <!--{{ item.Unit_Test.Status }}-->
+            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            </i>
+            <i 
+            ng-class="get_Status_Icon( item.Unit_Test.Status );"
+            class=" w3-padding-0 w3-margin-0"
+            style="position: relative;top: -2.8px;left: -21.75px;">
+              
+            </i>
+            <span 
+            ng-class="progressBar_Text_Color(
+              'Build',
+              item.Unit_Test.Status,
+              item.Functional_Test.Status,
+              item.text_Color
+            );"
+            class="w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+            style="max-width: 100%;float: right;"
+            >
+              &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+            </span>
+          </td>
+          <!-- class="w3-col w3-container w3-rest" -->
+          <td 
+          ng-class="item.text_Color"
+          class=" w3-center w3-padding-0 w3-margin-0"
+          >
+            <span 
+            ng-class="progressBar_Text_Color(
+              'Build',
+              item.Functional_Test.Status,
+              item.status,
+              item.text_Color
+            );"
+            class=" w3-light-grey w3-tiny w3-round w3-padding-0 w3-margin-0"
+            style="max-width: 100%;float: left;"
+            >
+              &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
+            </span>
+            <!--div 
+            class="w3-text-blue w3-tiny w3-round w3-padding-0 w3-margin-0 gradient_slash_2">
+              &#9640;&#9640;&#9640;&#9640;&#9640;
+            <div-->
+            <!--{{ item.Functional_Test.Status }}-->
+            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            </i>
+            <i 
+            ng-class="get_Status_Icon( item.Functional_Test.Status );"
+            class="w3-padding-0 w3-margin-0"
+            style="position: relative;top: -2.8px;left: -21.75px;">
+              
+            </i>
+          </td>                
+          <td ng-class="get_Text_Color(item.status)">
+            <!-- work as expected i class="ng-class: item.icon;"></i-->
+            <!--{{ $scope.Status[1] }}
+            {{ get_Status() }}-->
+            <i class="ng-class: get_Status_Icon( 
+            get_Status( 
+            item.Build.Status,
+            item.Unit_Test.Status,
+            item.Functional_Test.Status ),
+            true
+            );"></i>
+            {{ item.status }}
+          </td>                
+        </tr>
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>

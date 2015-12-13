@@ -5,12 +5,19 @@ var app = angular.module(
   []
 );
 */
+
+/*
 app.controller(
   'submissionsCtrl', 
   function(
     $scope, 
-    $http) {
+    $http) {*/
       
+/* JavaScript / Angular custom Directive: */
+function submissionsCtrl() {
+  return {
+    scope: {},
+    controller: function ($http) {
       
       function get_Status(
         build, 
@@ -325,29 +332,14 @@ app.controller(
         return result_Obj;              
       }
       
-      $http.get("/data/changed_code_commit.json")
-      .then(function(response) {
-        //console.debug(response.data);
-        
-        ///console.debug(response.responseText);
-        /*var submissionsObj = {
-          "submissions": [
-          {
-              "Change_List": 432464, 
-              "Owner": "JTuck", 
-              "Time_Started": "Tue Dec 08 2015 17:08:54 GMT+0500 (YEKT)",
-              "Build": {"Status": "Pending"},
-              "Unit_Test": {"Status": undefined},
-              "Functional_Test": {"Status": undefined}
-          }]};*/
-        //var myArr = JSON.parse(xmlhttp.responseText);
-        //var submissionsObj = JSON.parse(response.data.text);
-        var submissions_Obj_Array = response.data.submissions;
-        var msec = Date.parse("Tue Dec 08 2015 17:08:54 GMT+0500 (YEKT)");
-        var d = new Date(msec);
-        var date_Time_AM_Obj = {};
-        
-        /* preprocessing */
+      var submissions_Obj_Array = {};
+      var msec = Date.parse("Tue Dec 08 2015 17:08:54 GMT+0500 (YEKT)");
+      var d = new Date(msec);
+      var date_Time_AM_Obj = {};
+      var parent_This = this;
+
+      /* preprocessing */
+      function commits_Preprocessing(parent_This) {
         // making calculated fields for data view representation
         /// iterate over object `keys`
         ///for (var record in submissions_Obj_Array) {
@@ -386,13 +378,17 @@ app.controller(
         // must be array
         ///$scope.submissions = submissionsObj.submissions;
         //$scope.submissions = response.data.submissions;
-        $scope.submissions = submissions_Obj_Array;
+        //$scope
+        parent_This
+        .submissions = submissions_Obj_Array;
         ///console.debug(JSON.parse(response.responseText));
         /*console.debug(d.getDay() + '/' + d.getMonth() + '/' + d.getFullYear() +
         '/' + d.getHours() + '/' + d.getMinutes() );*/
         //console.debug(d.toLocaleString() );
         //console.debug( get_Date_Time_AM(d.toLocaleString()) );
-        $scope.Status = {
+        //$scope
+        parent_This
+        .Status = {
           "Status": [
             "undefined", 
             "Pending",
@@ -400,15 +396,120 @@ app.controller(
             "Passed",
             "Failed"
             ]};
-        console.debug($scope.Status);   
-        console.debug($scope.Status[1]);
+        //console.debug($scope.Status);   
+        console.debug(
+          //$scope
+          parent_This
+          .Status[1]);
         ///console.debug($scope.Status[2]);
-        $scope.get_Status = get_Status;
+        //$scope
+        parent_This
+        .get_Status = get_Status;
         //console.debug($scope.get_Status);
-        $scope.get_Status_Icon = get_Status_Icon;
-        $scope.get_OverAll_Status_Color = get_OverAll_Status_Color;
-        $scope.get_Text_Color = get_Text_Color;
-        $scope.progressBar_Text_Color = progressBar_Text_Color;
-            
-      });
-});
+        //$scope
+        parent_This
+        .get_Status_Icon = get_Status_Icon;
+        //$scope
+        parent_This
+        .get_OverAll_Status_Color = get_OverAll_Status_Color;
+        //$scope
+        parent_This
+        .get_Text_Color = get_Text_Color;
+        //$scope
+        parent_This
+        .progressBar_Text_Color = progressBar_Text_Color;
+      }
+      
+      /* somewere must be 'require' -> dependence injected */
+      $http.get("/data/changed_code_commit.json")
+      .then(
+        function(response) {
+          //console.debug(response.data);
+          
+          ///console.debug(response.responseText);
+          /*var submissionsObj = {
+            "submissions": [
+            {
+                "Change_List": 432464, 
+                "Owner": "JTuck", 
+                "Time_Started": "Tue Dec 08 2015 17:08:54 GMT+0500 (YEKT)",
+                "Build": {"Status": "Pending"},
+                "Unit_Test": {"Status": undefined},
+                "Functional_Test": {"Status": undefined}
+            }]};*/
+          //var myArr = JSON.parse(xmlhttp.responseText);
+          //var submissionsObj = JSON.parse(response.data.text);
+          submissions_Obj_Array = response.data.submissions;
+          
+          commits_Preprocessing(parent_This);    
+        }
+      );
+//});
+
+    },
+    // instantiate the Controller as "vm" to namespace the 
+    // Class-like Object
+    controllerAs: 'vm',
+    // our HTML template
+    templateUrl: 'views/commits_List.html'
+  };
+}
+
+/* JavaScript / Angular custom Directive: */
+function todo() {
+  return {
+    scope: {},
+    controller: function () {
+      // set an empty Model for the <input>
+      this.label = '';
+      // have some dummy data for the todo list
+      // complete property with Boolean values to display 
+      // finished todos
+      this.todos = [{
+        label: 'Learn Angular',
+        complete: false
+      },{
+        label: 'Deploy to S3',
+        complete: true
+      },{
+        label: 'Rewrite Todo Component',
+        complete: true
+      }];
+      // method to iterate the todo items and return
+      // a filtered Array of incomplete items
+      // we then capture the length to display 1 of 3
+      // for example
+      this.updateIncomplete = function () {
+        return this.todos.filter(function (item) {
+          return !item.complete;
+        }).length;
+      };
+      // each todo item contains a ( X ) button to delete it
+      // we simply splice it from the Array using the $index
+      this.deleteItem = function (index) {
+        this.todos.splice(index, 1);
+      };
+      // the submit event for the <form> allows us to type and
+      // press enter instead of ng-click on the <button> element
+      // we capture $event and prevent default to prevent form submission
+      // and if the label has a length, we'll unshift it into the this.todos
+      // Array which will then add the new todo item into the list
+      // we'll then set this.label back to an empty String
+      this.onSubmit = function (event) {
+        if (this.label.length) {
+          this.todos.unshift({
+            label: this.label,
+            complete: false
+          });
+          this.label = '';
+        }
+        event.preventDefault();
+      };
+    },
+    // instantiate the Controller as "vm" to namespace the 
+    // Class-like Object
+    controllerAs: 'vm',
+    // our HTML template
+    templateUrl: 'views/todo.html'//'../partials/todo.html'
+  };
+}
