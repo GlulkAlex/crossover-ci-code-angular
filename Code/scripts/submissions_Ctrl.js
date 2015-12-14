@@ -14,7 +14,8 @@ app.controller(
     $http) {*/
       
 /* JavaScript / Angular custom Directive: */
-function submissionsCtrl() {
+//function submissionsCtrl() {
+function commit() {  
   return {
     scope: {},
     controller: function ($http) {
@@ -256,11 +257,12 @@ function submissionsCtrl() {
           //fa fa-circle-thin
           //icon_Class = "fa fa-minus-circle";
           //icon_Class = "fa fa-ellipsis-h";
+          //class="icon-pending"
           if (isOverallStatus) {
             // w3-amber
-            icon_Class = "fa fa-minus-circle fa-ellipsis-h w3-text-amber";
+            icon_Class = "fa fa-minus-circle fa-ellipsis-h w3-text-amber icon-pending";
           } else {
-            icon_Class = "fa fa-ellipsis-h w3-large ";
+            icon_Class = "fa fa-ellipsis-h w3-large icon-pending";
           }          
         } else if (
           status == "Running"
@@ -343,12 +345,14 @@ function submissionsCtrl() {
         // making calculated fields for data view representation
         /// iterate over object `keys`
         ///for (var record in submissions_Obj_Array) {
-        for (
+        // iterate over items in iterable
+        for (var record of submissions_Obj_Array) {
+        /*for (
           var i = 0, array_Length = submissions_Obj_Array.length; 
           i < array_Length; 
           i++
         ) {
-          var record = submissions_Obj_Array[i];
+          var record = submissions_Obj_Array[i];*/
           
           msec = Date.parse( record.Time_Started );
           record.msec = msec;
@@ -458,6 +462,13 @@ function submissionsCtrl() {
 /* JavaScript / Angular custom Directive: */
 function todo() {
   return {
+    /*
+    'A' - only matches attribute name
+    'E' - only matches element name
+    'C' - only matches class name
+    */
+    restrict: 'E',
+    /* isolate scope */
     scope: {},
     controller: function () {
       // set an empty Model for the <input>

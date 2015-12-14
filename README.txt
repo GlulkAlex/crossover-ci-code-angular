@@ -2,7 +2,7 @@ A simple readme on:
 
 - If you need to build anything (Example: grunt)
 No need for build, all just plain JS, CSS and HTML.
-Must run at browser from local file system even without server 
+Must run at browser from local file system with running local server 
 (internet connection needed for CDN usage).
 
 - How to start your application (Example: node.js server startup script)
