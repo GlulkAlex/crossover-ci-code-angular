@@ -20,7 +20,11 @@ function commit() {
     scope: {},
     controller: function ($http) {
       
-      function get_Status(
+      /* ? Closure ? 
+      may be send 'this' context as
+      function parameter ?
+      */ 
+      this.get_Status = function (
         build, 
         unit_Test,
         functional_Test
@@ -53,7 +57,7 @@ function commit() {
         }
         // The function returns
         return status;              
-      }
+      };
       
       /*
       {
@@ -69,7 +73,7 @@ function commit() {
        * "color"
        * "background-color"
        */ 
-      function get_OverAll_Status_Color(
+      this.get_OverAll_Status_Color = function (
         status
       ) {
         var status_Color;// = undefined;
@@ -109,9 +113,9 @@ function commit() {
         }
         // The function returns
         return status_Color;              
-      }
+      };
 
-      function get_Text_Color(
+      this.get_Text_Color = function (
         status
       ) {
         var text_Color;// = undefined;
@@ -151,9 +155,9 @@ function commit() {
         }
         // The function returns
         return text_Color;              
-      }
+      };
 
-      function progressBar_Text_Color(
+      this.progressBar_Text_Color = function (
         /* [b, u, f] */
         stage,
         self_Status,
@@ -226,9 +230,9 @@ function commit() {
         }
         // The function returns
         return text_Color;              
-      }
+      };
       
-      function get_Status_Icon(
+      this.get_Status_Icon = function (
         status,
         isOverallStatus
       ) {
@@ -301,9 +305,9 @@ function commit() {
         }
         // The function returns
         return icon_Class;              
-      }
+      };
       
-      function get_Date_Time_AM(local_Date_Str) {
+      this.get_Date_Time_AM = function (local_Date_Str) {
         /* assume that 'local_Date_Str' is OK*/
         var date_Str_Split_Array = [];
         var hours_Minutes_Array = [];
@@ -332,21 +336,53 @@ function commit() {
         }
         // The function returns 
         return result_Obj;              
-      }
+      };
       
-      var submissions_Obj_Array = {};
+      //var 
+      this.submissions_Obj_Array = {};
       var msec = Date.parse("Tue Dec 08 2015 17:08:54 GMT+0500 (YEKT)");
       var d = new Date(msec);
       var date_Time_AM_Obj = {};
-      var parent_This = this;
-
+      //var 
+      //this.parent_This = this;
+      console.log( "'this' of controller: function ($http)");
+      console.debug( this);
+      
+      /* How to pass 'this' `context`
+      var animals = [
+        { species: 'Lion', name: 'King' },
+        { species: 'Whale', name: 'Fail' }
+      ];
+      
+      for (var i = 0; i < animals.length; i++) {
+        (function(i) {
+          this.print = function() {
+            console.log('#' + i + ' ' + this.species
+                        + ': ' + this.name);
+          }
+          this.print();
+        }).call(animals[i], i);
+      }
+      */
+      
       /* preprocessing */
-      function commits_Preprocessing(parent_This) {
+      function commits_Preprocessing(
+        http_Response,
+        //parent_This
+        context// -> this
+      ) {
         // making calculated fields for data view representation
+        console.log( "http_Response in preprocessing");
+        console.debug( http_Response );
+        console.log( "context in preprocessing");
+        console.debug( context );
+        context.submissions_Obj_Array = http_Response;
+        console.log( "submissions_Obj_Array in preprocessing");
+        console.debug( context.submissions_Obj_Array );
         /// iterate over object `keys`
         ///for (var record in submissions_Obj_Array) {
         // iterate over items in iterable
-        for (var record of submissions_Obj_Array) {
+        for (var record of context.submissions_Obj_Array) {
         /*for (
           var i = 0, array_Length = submissions_Obj_Array.length; 
           i < array_Length; 
@@ -358,40 +394,42 @@ function commit() {
           record.msec = msec;
           d = new Date(msec);
           record.date = d;
-          date_Time_AM_Obj = get_Date_Time_AM(d.toLocaleString());
+          date_Time_AM_Obj = context.get_Date_Time_AM(d.toLocaleString());
           
           record.dd_mm_yyyy = date_Time_AM_Obj.dd_mm_yyyy;  
           record.hh_mm = date_Time_AM_Obj.hh_mm;
           record.am = date_Time_AM_Obj.am;
           
-          record.status = get_Status(
+          record.status = context.get_Status(
             record.Build.Status, 
             record.Unit_Test.Status,
             record.Functional_Test.Status
           );
           
-          record.icon = get_Status_Icon(
+          record.icon = context.get_Status_Icon(
             record.status
           );
           //background-color:
-          record.status_Color = get_OverAll_Status_Color( record.status );
-          record.text_Color = get_Text_Color( record.status );
+          record.status_Color = context.get_OverAll_Status_Color( record.status );
+          record.text_Color = context.get_Text_Color( record.status );
         }
-        console.debug( submissions_Obj_Array );
+        //console.log( "submissions_Obj_Array");
+        //console.debug( this.submissions_Obj_Array );
         //console.debug(submissionsObj);
         // must be array
         ///$scope.submissions = submissionsObj.submissions;
         //$scope.submissions = response.data.submissions;
         //$scope
-        parent_This
-        .submissions = submissions_Obj_Array;
+        //parent_This
+        context.submissions = context.submissions_Obj_Array;
         ///console.debug(JSON.parse(response.responseText));
         /*console.debug(d.getDay() + '/' + d.getMonth() + '/' + d.getFullYear() +
         '/' + d.getHours() + '/' + d.getMinutes() );*/
         //console.debug(d.toLocaleString() );
         //console.debug( get_Date_Time_AM(d.toLocaleString()) );
         //$scope
-        parent_This
+        //parent_This
+        context
         .Status = {
           "Status": [
             "undefined", 
@@ -400,31 +438,54 @@ function commit() {
             "Passed",
             "Failed"
             ]};
-        //console.debug($scope.Status);   
+        //console.debug($scope.Status); 
+        console.log( "'this' of controller: function ($http)");
         console.debug(
           //$scope
-          parent_This
+          //parent_This
+          context
           .Status[1]);
         ///console.debug($scope.Status[2]);
         //$scope
-        parent_This
-        .get_Status = get_Status;
+        /*parent_This
+        .get_Status = get_Status;*/
         //console.debug($scope.get_Status);
         //$scope
-        parent_This
-        .get_Status_Icon = get_Status_Icon;
+        /*parent_This
+        .get_Status_Icon = get_Status_Icon;*/
         //$scope
-        parent_This
-        .get_OverAll_Status_Color = get_OverAll_Status_Color;
+        /*parent_This
+        .get_OverAll_Status_Color = get_OverAll_Status_Color;*/
         //$scope
-        parent_This
-        .get_Text_Color = get_Text_Color;
+        /*parent_This
+        .get_Text_Color = get_Text_Color;*/
         //$scope
-        parent_This
-        .progressBar_Text_Color = progressBar_Text_Color;
+        /*parent_This
+        .progressBar_Text_Color = progressBar_Text_Color;*/
       }
       
+      /* The value of 'this', 
+      when used in a 'function', is 
+      the 'object' 
+      that "owns" the 'function'. */
+      /*
+      With call() or apply() 
+      you can 
+      set the value of 'this', and 
+      invoke a 'function' as 
+      a new 'method' of an existing 'object'.
+      */
+      ///var preprocessing = commits_Preprocessing.call(
+        //this
+        //http_Response
+        //null//,
+        //parent_This
+        /* ? positional argument ?*/
+        //context -> 
+        //this
+      //)/*(this)*/;
       /* somewere must be 'require' -> dependence injected */
+      (function(conText) {
       $http.get("/data/changed_code_commit.json")
       .then(
         function(response) {
@@ -443,11 +504,25 @@ function commit() {
             }]};*/
           //var myArr = JSON.parse(xmlhttp.responseText);
           //var submissionsObj = JSON.parse(response.data.text);
-          submissions_Obj_Array = response.data.submissions;
-          
-          commits_Preprocessing(parent_This);    
+          console.log( "$http 'this' context");
+          console.debug( this);
+          console.debug( conText);
+          //submissions_Obj_Array = response.data.submissions;
+          /* scope problem -> this not the same */
+          //this.
+          //commits_Preprocessing(
+          //preprocessing(  
+            //this.parent_This
+            //response.data.submissions//,
+            //this
+          //)
+          commits_Preprocessing.call(
+            this, 
+            response.data.submissions, conText);    
         }
       );
+      }).call(this, this);
+      //)(this);
 //});
 
     },
