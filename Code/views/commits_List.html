@@ -11,33 +11,45 @@
     class="commit w3-table w3-bordered w3-border w3-hoverable w3-col m7 l9 w3-card-2"
     >
       <caption></caption>
-      <thead class="w3-container w3-medium w3-center">
-          <tr class="w3-small">
+      <thead 
+      class="w3-container w3-medium w3-center">
+          <tr 
+          class="w3-small">
             <!-- &nbsp; style="width:2px;padding-left: 0px;padding-right: 0px;" -->
-              <th class="w3-container w3-padding-0 w3-light-grey" 
+              <th 
+              class="w3-container w3-padding-0 w3-light-grey" 
               style="width:2px;">
                 
               </th>
               <!--w3-text-black-->
-              <th class="w3-text-grey w3-center">
+              <th 
+              class="w3-text-grey w3-center">
                 Change List
               </th>
-              <th class="w3-text-black w3-center">Owner</th>
-              <th class="w3-text-black w3-center">
+              <th 
+              class="w3-text-black w3-center">Owner</th>
+              <th 
+              class="w3-text-black w3-center">
                   Time Started
               </th>
-              <th class="w3-text-black w3-center">Build
+              <th 
+              class="w3-text-black w3-center">Build
               </th>
-              <th class="w3-text-black w3-center">Unit Test</th>
-              <th class="w3-text-black w3-center">Functional Test</th>
-              <th class="w3-text-black w3-center">Status</th>
+              <th 
+              class="w3-text-black w3-center">Unit Test</th>
+              <th 
+              class="w3-text-black w3-center">Functional Test</th>
+              <th 
+              class="w3-text-black w3-center">Status</th>
           </tr>
       </thead>  
       <tbody>
+        <!-- controllerAs alias prefix needed -->
         <!-- ng-repeat="item in submissions | orderBy:'Time_Started'" -->
         <!-- ng-repeat="item in submissions | orderBy:'Change_List': reverse" -->
         <!-- ng-repeat="item in submissions | orderBy:'date': reverse" -->
-        <tr ng-repeat="item in submissions | orderBy:'-msec'"
+        <tr 
+        ng-repeat="item in veiwModel.submissions | orderBy:'-msec'"
         class="w3-small">
           <!--class="ng-class: (get_OverAll_Status_Color(item.status_Color) + ' w3-container w3-padding-0');"-->  
           <!--style="color:orange;"-->
@@ -76,11 +88,12 @@
           class="{{ item.text_Color }} w3-center w3-padding-0 w3-margin-0">
             <!--{{ item.Build.Status }}-->
             <!-- ng-class: expression; -->
-            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            <i 
+            class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
             </i>
               <i 
               ng-style="'{color:' + get_OverAll_Status_Color(item.status_Color) + '}'"
-              ng-class="get_Status_Icon( item.Build.Status );"
+              ng-class="veiwModel.get_Status_Icon( item.Build.Status );"
               class="w3-padding-0 w3-margin-0"
               style="position: relative;top: -2.8px;left: -21.75px;"
               >
@@ -88,7 +101,7 @@
             <!--progressBar_Text_Color-->  
             <!--ng-class="item.text_Color"-->
             <span 
-            ng-class="progressBar_Text_Color(
+            ng-class="veiwModel.progressBar_Text_Color(
               'Build',
               item.Build.Status,
               item.Unit_Test.Status,
@@ -106,7 +119,7 @@
           class=" w3-center w3-padding-0 w3-margin-0"
           >
             <span 
-            ng-class="progressBar_Text_Color(
+            ng-class="veiwModel.progressBar_Text_Color(
               'Build',
               item.Build.Status,
               item.Unit_Test.Status,
@@ -118,16 +131,17 @@
               &#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;&#9648;&#9649;
             </span>
             <!--{{ item.Unit_Test.Status }}-->
-            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            <i 
+            class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
             </i>
             <i 
-            ng-class="get_Status_Icon( item.Unit_Test.Status );"
+            ng-class="veiwModel.get_Status_Icon( item.Unit_Test.Status );"
             class=" w3-padding-0 w3-margin-0"
             style="position: relative;top: -2.8px;left: -21.75px;">
               
             </i>
             <span 
-            ng-class="progressBar_Text_Color(
+            ng-class="veiwModel.progressBar_Text_Color(
               'Build',
               item.Unit_Test.Status,
               item.Functional_Test.Status,
@@ -145,7 +159,7 @@
           class=" w3-center w3-padding-0 w3-margin-0"
           >
             <span 
-            ng-class="progressBar_Text_Color(
+            ng-class="veiwModel.progressBar_Text_Color(
               'Build',
               item.Functional_Test.Status,
               item.status,
@@ -161,21 +175,24 @@
               &#9640;&#9640;&#9640;&#9640;&#9640;
             <div-->
             <!--{{ item.Functional_Test.Status }}-->
-            <i class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
+            <i 
+            class="fa fa-circle w3-text-light-grey w3-xlarge w3-padding-0 w3-margin-0">
             </i>
             <i 
-            ng-class="get_Status_Icon( item.Functional_Test.Status );"
+            ng-class="veiwModel.get_Status_Icon( item.Functional_Test.Status );"
             class="w3-padding-0 w3-margin-0"
             style="position: relative;top: -2.8px;left: -21.75px;">
               
             </i>
           </td>                
-          <td ng-class="get_Text_Color(item.status)">
+          <td 
+          ng-class="veiwModel.get_Text_Color(item.status)">
             <!-- work as expected i class="ng-class: item.icon;"></i-->
             <!--{{ $scope.Status[1] }}
             {{ get_Status() }}-->
-            <i class="ng-class: get_Status_Icon( 
-            get_Status( 
+            <i 
+            class="ng-class: veiwModel.get_Status_Icon( 
+            veiwModel.get_Status( 
             item.Build.Status,
             item.Unit_Test.Status,
             item.Functional_Test.Status ),
@@ -188,3 +205,30 @@
       <tfoot>
       </tfoot>
     </table>
+    
+    <div class="commit">
+      <!--style="display:block"
+      style="display:none"
+      class="ng-hide"
+      ng-show="document.forms[0].elements[0].checked"
+      ng-show="document.forms[0].elements[2].checked"
+      ng-show="document.forms[0].elements[1].checked"
+      -->
+      <img 
+      src="img/Landing_Page.png" 
+      alt="The Landing Page layout"
+      
+      
+      >
+      <img 
+      src="img/Expanded_View__Passed_Build.png" 
+      alt="The Expanded View of Passed Build Page layout"
+      
+      
+      
+      >
+      <img src="img/Expanded_View__Failed_Build.png" 
+      alt="The Expanded View of Failed Build Page layout"
+      
+      >      
+    </div>

@@ -526,9 +526,10 @@ function commit() {
 //});
 
     },
-    // instantiate the Controller as "vm" to namespace the 
-    // Class-like Object
-    controllerAs: 'vm',
+    // instantiate the Controller 
+    // as <alias> to `namespace` 
+    // the Class-like Object
+    controllerAs: 'veiwModel',
     // our HTML template
     templateUrl: 'views/commits_List.html'
   };

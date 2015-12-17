@@ -183,14 +183,19 @@
       <i 
       onclick="this.parentElement.style.display='none';" 
       class="fa fa-times w3-large w3-right w3-opennav"></i>
-      <!-- document.forms[0].elements[1].checked
+      <!-- 
+      document.forms[0].elements[1].checked
       document.images[0].style.display
-      value="0"  -->
+      value="0"  
+      ng-model="veiwModel.img_0.show" 
+      ng-model="veiwModel.img_0.show" 
+      ng-model="veiwModel.img_1.show" 
+      ng-model="veiwModel.img_2.show" 
+      -->
       <input 
       class="w3-radio" 
       type="radio" 
       name="back-Ground-Image" 
-      ng-model="img_0.show" 
       aria-label="Toggle ngHide"
       onclick="toggle_BackGroundImage(undefined)"
       >
@@ -200,7 +205,6 @@
       class="w3-radio" 
       type="radio" 
       name="back-Ground-Image" 
-      ng-model="img_0.show" 
       aria-label="Toggle ngHide"
       onclick="toggle_BackGroundImage(0)"
       >
@@ -210,7 +214,6 @@
       class="w3-radio" 
       type="radio" 
       name="back-Ground-Image" 
-      ng-model="img_1.show" 
       aria-label="Toggle ngHide"
       onclick="toggle_BackGroundImage(1)"
       checked>
@@ -220,34 +223,14 @@
       class="w3-radio" 
       type="radio" 
       name="back-Ground-Image" 
-      ng-model="img_2.show" 
       aria-label="Toggle ngHide"
       onclick="toggle_BackGroundImage(2)"
       >
       <label class="w3-validate">Set Expanded_View__Failed_Build.png</label>
     </form>
+    
 
-    <!--style="display:block"
-    style="display:none"
-    class="ng-hide"-->
-    <img 
-    src="img/Landing_Page.png" 
-    alt="The Landing Page layout"
-    
-    ng-show="document.forms[0].elements[0].checked"
-    >
-    <img 
-    src="img/Expanded_View__Passed_Build.png" 
-    alt="The Expanded View of Passed Build Page layout"
-    
-    ng-show="document.forms[0].elements[1].checked"
-    
-    >
-    <img src="img/Expanded_View__Failed_Build.png" 
-    alt="The Expanded View of Failed Build Page layout"
-    ng-show="document.forms[0].elements[2].checked"
-    >
-    
+
     </section>
 
     <figure>
